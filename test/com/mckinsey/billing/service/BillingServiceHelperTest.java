@@ -52,6 +52,13 @@ public class BillingServiceHelperTest {
 	}
 	
 	@Test
+	public void testShouldCalculateTotalBillAmountForCustomerOver2YearsAndDontDiscountForGroceries() {
+		Bill bill = DataMother.createBill(UserType.CUSTOMER_OVER_TWO_YEARS);
+		DataMother.addItemToBill("rice", ItemType.GROCERIES, 90, bill);
+		assertEquals(90.0 , billingServiceHelper.calculateTotalBillAmountApplyingDiscount(bill), 0.0001);
+	}
+	
+	@Test
 	public void testShouldCalculateTotalBillAmountForStoreEmployeeAndDiscountForToys() {
 		Bill bill = DataMother.createBill(UserType.STORE_EMPLOYEE);
 		DataMother.addItemToBill("toy1", ItemType.MISC, 100, bill);
@@ -65,6 +72,22 @@ public class BillingServiceHelperTest {
 		DataMother.addItemToBill("toy1", ItemType.MISC, 100, bill);
 		DataMother.addItemToBill("toy2", ItemType.MISC, 200, bill);
 		assertEquals(270.0 , billingServiceHelper.calculateTotalBillAmountApplyingDiscount(bill), 0.0001);
+	}
+	
+	@Test
+	public void testShouldCalculateTotalBillAmountForCustomerOver2YearsAndDiscountForToys() {
+		Bill bill = DataMother.createBill(UserType.CUSTOMER_OVER_TWO_YEARS);
+		DataMother.addItemToBill("toy1", ItemType.MISC, 100, bill);
+		DataMother.addItemToBill("toy2", ItemType.MISC, 200, bill);
+		assertEquals(285.0 , billingServiceHelper.calculateTotalBillAmountApplyingDiscount(bill), 0.0001);
+	}
+	
+	@Test
+	public void testShouldCalculateTotalBillAmountForOthersAndDiscountForToys() {
+		Bill bill = DataMother.createBill(UserType.OTHER);
+		DataMother.addItemToBill("toy1", ItemType.MISC, 100, bill);
+		DataMother.addItemToBill("toy2", ItemType.MISC, 200, bill);
+		assertEquals(300.0 , billingServiceHelper.calculateTotalBillAmountApplyingDiscount(bill), 0.0001);
 	}
 	
 	@Test

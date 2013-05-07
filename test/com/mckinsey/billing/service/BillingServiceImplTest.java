@@ -35,6 +35,13 @@ public class BillingServiceImplTest {
 	}
 	
 	@Test
+	public void testShouldCalculateTotalBillAmountForOthersAndDontDiscountForGroceries() {
+		Bill bill = DataMother.createBill(UserType.OTHER);
+		DataMother.addItemToBill("rice", ItemType.GROCERIES, 90, bill);
+		assertEquals(90.0 , billingService.calculateNetPayableAmount(bill), 0.0001);
+	}
+	
+	@Test
 	public void testShouldCalculateTotalBillAmountForAffiliateAndDontDiscountForGroceriesAndApply5Dollar() {
 		Bill bill = DataMother.createBill(UserType.STORE_AFFILIATE);
 		DataMother.addItemToBill("rice", ItemType.GROCERIES, 100, bill);
@@ -58,6 +65,14 @@ public class BillingServiceImplTest {
 	}
 	
 	@Test
+	public void testShouldCalculateTotalBillAmountForOtherAndDiscountForToysApply5DollarRule() {
+		Bill bill = DataMother.createBill(UserType.OTHER);
+		DataMother.addItemToBill("toy1", ItemType.MISC, 100, bill);
+		DataMother.addItemToBill("toy2", ItemType.MISC, 200, bill);
+		assertEquals(285.0 , billingService.calculateNetPayableAmount(bill), 0.0001);
+	}
+	
+	@Test
 	public void testShouldCalculateTotalBillAmountForStoreEmployeeAndDiscountForToysButNoDiscountForGroceriesAndDontApply5DollarRule() {
 		Bill bill = DataMother.createBill(UserType.STORE_EMPLOYEE);
 		DataMother.addItemToBill("toy1", ItemType.MISC, 10, bill);
@@ -73,4 +88,11 @@ public class BillingServiceImplTest {
 		assertEquals(280.0 , billingService.calculateNetPayableAmount(bill), 0.0001);
 	}
 
+	@Test
+	public void testShouldCalculateTotalBillAmountForOtherAndDiscountForToysButNoDiscountForGroceriesAndApply5DollarRule() {
+		Bill bill = DataMother.createBill(UserType.OTHER);
+		DataMother.addItemToBill("toy1", ItemType.MISC, 100, bill);
+		DataMother.addItemToBill("rice", ItemType.GROCERIES, 200, bill);
+		assertEquals(285.0 , billingService.calculateNetPayableAmount(bill), 0.0001);
+	}
 }
