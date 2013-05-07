@@ -23,3 +23,4 @@ Following are my assumptions in coding exercise
 3) I assumed that the userTypes and the discount associated does'nt change often. So I have used enums for them.
 
 
+In case of any questions please feel free to contact me Email : sunil.inteti@gmail.com, ph: 9958010410
