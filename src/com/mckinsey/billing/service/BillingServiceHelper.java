@@ -8,6 +8,11 @@ import com.mckinsey.billing.domain.UserType;
 
 public class BillingServiceHelper {
 
+	/**
+	 * Applies discount on discountable items and calculates the total bill
+	 * @param bill
+	 * @return
+	 */
 	public double calculateTotalBillAmountApplyingDiscount(Bill bill) {
 		UserType userType = bill.getUser().getUserType();
 		int discountPercentage = 0;
@@ -33,10 +38,21 @@ public class BillingServiceHelper {
 		return totalAmount;
 	}
 
+	/**
+	 * helper method to subtract discount from totalDiscountable amount
+	 * @param discountPercentage
+	 * @param totalAmountDiscountable
+	 * @return
+	 */
 	public double calculateTotalAmountAfterDiscount(int discountPercentage, double totalAmountDiscountable) {
 		return totalAmountDiscountable - ((totalAmountDiscountable * discountPercentage)/100);
 	}
 	
+	/**
+	 * Helper method to calculate the Five dollar discount amount 
+	 * @param totalAmount
+	 * @return
+	 */
 	public int calculateFiveDollarDiscountIfApplicable(double totalAmount) {
 		return Double.valueOf(totalAmount/100).intValue() * 5; 
 	}

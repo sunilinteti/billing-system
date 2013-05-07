@@ -5,7 +5,9 @@ import com.mckinsey.billing.domain.Bill;
 public class BillingServiceImpl implements BillingService {
 
 	private BillingServiceHelper billingServiceHelper = new BillingServiceHelper();
-	
+	/**
+	 * Service method to calculate the Net Payable amount by the user.
+	 */
 	@Override
 	public double calculateNetPayableAmount(Bill bill) {
 		double totalBillAmount = billingServiceHelper.calculateTotalBillAmountApplyingDiscount(bill);
