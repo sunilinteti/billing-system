@@ -20,6 +20,6 @@ Following are my assumptions in coding exercise
 
 2) User has only one Usertype and he gets discount for item if it is discountable. 5 dollar discount on every 100$ purchase is appllied after applying the discount.
 
-3) 
+3) I assumed that the userTypes and the discount associated does'nt change often. So I have used enums for them.
 
 
