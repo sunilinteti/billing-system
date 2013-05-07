@@ -14,6 +14,7 @@ public class Bill {
 	public Bill(long billId, User user) {
 		this.user = user;
 		this.billingDate = new Date();
+		this.billId = billId;
 	}
 	
 	private long billId;
